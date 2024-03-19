@@ -5,7 +5,7 @@ export default function MoviesPage({ subForm }) {
         type="text"
         name="search"
         autoComplete="off"
-        placeholder="Search movies, which you like"
+        placeholder="Search movies"
       />
       <button type="submit">Search</button>
     </form>

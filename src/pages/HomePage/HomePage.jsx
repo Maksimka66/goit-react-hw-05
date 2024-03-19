@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import MovieDetailsPage from "../MovieDetailsPage/MovieDetailsPage";
 import filmsRequest from "../../films";
 
 export default function HomePage() {
@@ -20,6 +21,7 @@ export default function HomePage() {
   return (
     <div>
       <h1>Trending today</h1>
+      <MovieDetailsPage filmsArr={films} />
     </div>
   );
 }
