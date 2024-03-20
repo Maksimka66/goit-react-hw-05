@@ -1,27 +1,27 @@
 import { useEffect, useState } from "react";
-import MovieDetailsPage from "../MovieDetailsPage/MovieDetailsPage";
-import filmsRequest from "../../films";
+import MovieList from "../../components/MovieList/MovieList";
+
+import { filmsRequest } from "../../films";
 
 export default function HomePage() {
   const [films, setFilms] = useState([]);
 
   useEffect(() => {
-    async function getMovies() {
+    const getMovies = async () => {
       try {
         const movies = await filmsRequest();
-        console.log(movies.results);
         setFilms(movies.results);
       } catch (error) {
         console.log(error);
       }
-    }
+    };
     getMovies();
   }, []);
 
   return (
     <div>
       <h1>Trending today</h1>
-      <MovieDetailsPage filmsArr={films} />
+      <MovieList films={films} />
     </div>
   );
 }

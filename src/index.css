@@ -39,6 +39,10 @@ ul {
   list-style-type: none;
 }
 
+img {
+  display: block;
+}
+
 button {
   border-radius: 8px;
   border: 1px solid transparent;

@@ -1,18 +1,44 @@
 import axios from "axios";
 
-axios.defaults.baseURL = "https://api.themoviedb.org/3";
+const config = {
+  baseURL: "https://api.themoviedb.org/3",
+  headers: {
+    accept: "application/json",
+    Authorization:
+      "Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJkNzMxYTRmMTFjNTA1ZDZkOTA0ZGU4N2MxNzFmODljMSIsInN1YiI6IjY1ZjVmMmZhZTE5NGIwMDE3Y2JkNjQzNSIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.5oB-JsZl2dv50WKDARIyz4KKR7-F2eLui7b_iY4mgOw",
+  },
+};
 
-export default async function filmsRequest() {
-  const options = new URLSearchParams({
-    api_key: "d731a4f11c505d6d904de87c171f89c1",
-    headers: {
-      accept: "application/json",
-      Authorization:
-        "Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJkNzMxYTRmMTFjNTA1ZDZkOTA0ZGU4N2MxNzFmODljMSIsInN1YiI6IjY1ZjVmMmZhZTE5NGIwMDE3Y2JkNjQzNSIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.5oB-JsZl2dv50WKDARIyz4KKR7-F2eLui7b_iY4mgOw",
-    },
-  });
+const instance = axios.create(config);
 
-  const response = await axios.get(`/trending/movie/day?${options}`);
-  console.log(response.data);
+export async function filmsRequest() {
+  const response = await instance.get("/trending/movie/day?language=en-US");
   return response.data;
+}
+
+// Деталі кожного фільму
+export async function filmDetails(id) {
+  const response = await instance.get(`/movie/${id}`);
+  return response.data;
+}
+
+// Для інпуту
+export async function filmSearch(value) {
+  const response = await instance.get(`/search/movie?query=${value}&page=1`);
+  return response.data;
+}
+
+// Акторський склад
+
+export async function getActors(id) {
+  const response = await instance.get(`/movie/${id}/credits`);
+  console.log(response);
+  return response;
+}
+
+// Для огляду на фільм
+export async function getMovieReviews(id) {
+  const response = await instance.get(`/movie/${id}/reviews`);
+  console.log(response);
+  return response;
 }
