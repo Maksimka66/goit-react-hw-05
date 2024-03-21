@@ -1,4 +1,5 @@
 import axios from "axios";
+import { Discuss } from "react-loader-spinner";
 
 const config = {
   baseURL: "https://api.themoviedb.org/3",
@@ -42,3 +43,19 @@ export async function getMovieReviews(id) {
   console.log(response);
   return response.data;
 }
+
+// // Лоадер
+// export function onLoad() {
+//   return (
+//     <Discuss
+//       visible={true}
+//       height="80"
+//       width="80"
+//       ariaLabel="discuss-loading"
+//       wrapperStyle={{}}
+//       wrapperClass="discuss-wrapper"
+//       color="#fff"
+//       backgroundColor="#F4442E"
+//     />
+//   );
+// }
