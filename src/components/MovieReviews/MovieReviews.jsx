@@ -3,18 +3,18 @@ import { useEffect, useState } from "react";
 import { getMovieReviews } from "../../films";
 import { useParams } from "react-router-dom";
 
-export default function MovieReviews({ id }) {
+export default function MovieReviews() {
   const [review, setReview] = useState("");
   const { reviewId } = useParams();
   console.log(reviewId);
 
   useEffect(() => {
-    if (!id) {
+    if (!reviewId) {
       return;
     }
     const getReviewsById = async () => {
       try {
-        const reviews = await getMovieReviews(id);
+        const reviews = await getMovieReviews(reviewId);
         console.log(reviews);
         setReview(reviews);
       } catch (error) {
@@ -23,7 +23,7 @@ export default function MovieReviews({ id }) {
     };
 
     getReviewsById();
-  }, [id]);
+  }, [reviewId]);
 
   return (
     <div>

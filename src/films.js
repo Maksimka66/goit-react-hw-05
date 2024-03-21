@@ -11,6 +11,7 @@ const config = {
 
 const instance = axios.create(config);
 
+// Тренди дня
 export async function filmsRequest() {
   const response = await instance.get("/trending/movie/day?language=en-US");
   return response.data;
@@ -29,7 +30,6 @@ export async function filmSearch(value) {
 }
 
 // Акторський склад
-
 export async function getActors(id) {
   const response = await instance.get(`/movie/${id}/credits`);
   console.log(response);
@@ -40,5 +40,5 @@ export async function getActors(id) {
 export async function getMovieReviews(id) {
   const response = await instance.get(`/movie/${id}/reviews`);
   console.log(response);
-  return response;
+  return response.data;
 }

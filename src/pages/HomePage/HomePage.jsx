@@ -3,6 +3,8 @@ import MovieList from "../../components/MovieList/MovieList";
 
 import { filmsRequest } from "../../films";
 
+import css from "./HomePage.module.css";
+
 export default function HomePage() {
   const [films, setFilms] = useState([]);
 
@@ -19,8 +21,8 @@ export default function HomePage() {
   }, []);
 
   return (
-    <div>
-      <h1>Trending today</h1>
+    <div className={css.trendingContainer}>
+      <h1 className={css.homeHeader}>Trending today</h1>
       <MovieList films={films} />
     </div>
   );

@@ -8,7 +8,7 @@ const linksStyle = ({ isActive }) => {
 
 export default function Navigation() {
   return (
-    <nav>
+    <nav className={css.navigation}>
       <NavLink to="/" className={linksStyle}>
         Home
       </NavLink>

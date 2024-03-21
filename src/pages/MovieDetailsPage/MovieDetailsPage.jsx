@@ -53,12 +53,12 @@ export default function MovieDetailsPage() {
       </div>
       <ul>
         <li>
-          <NavLink to={`/movies/:${movieId}/cast`} id={movieId}>
+          <NavLink to={`/movies/${movieId}/cast`} id={movieId}>
             Cast
           </NavLink>
         </li>
         <li>
-          <NavLink to={`/movies/:${movieId}/reviews`} id={movieId}>
+          <NavLink to="reviews" id={movieId}>
             Reviews
           </NavLink>
         </li>

@@ -1,6 +1,8 @@
 .link {
   text-decoration: none;
   color: black;
+  font-size: 20px;
+  font-family: Impact, Haettenschweiler, "Arial Narrow Bold", sans-serif;
 }
 
 .link:hover {
@@ -9,4 +11,10 @@
 
 .isActive {
   color: green;
+}
+
+.navigation {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
 }
