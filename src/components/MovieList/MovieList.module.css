@@ -8,8 +8,13 @@
 .movieListItem {
   color: #31d0aa;
   background-color: black;
+  border: 2px solid red;
+  border-radius: 8px;
+  font-family: "Times New Roman", Times, serif;
+  font-size: 20px;
 }
 
 .movieListItem:hover {
-  color: #4d5ae5;
+  background-color: wheat;
+  border-color: orange;
 }

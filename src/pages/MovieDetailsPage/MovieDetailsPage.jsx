@@ -2,6 +2,8 @@ import { useEffect, useState } from "react";
 import { NavLink, useParams } from "react-router-dom";
 import { filmDetails } from "../../films";
 
+import css from "./MovieDetailsPage.module.css";
+
 export default function MovieDetailsPage() {
   const [movie, setMovie] = useState({});
   const [genres, setGenres] = useState([]);
@@ -21,7 +23,7 @@ export default function MovieDetailsPage() {
         setMovie(film);
         console.log(film);
         const filmGenres = film.genres.map((genre) => (
-          <p key={genre.id}>{genre.name}</p>
+          <li key={genre.id}>{genre.name}</li>
         ));
         setGenres(filmGenres);
       } catch (error) {
@@ -33,25 +35,33 @@ export default function MovieDetailsPage() {
   }, [movieId]);
 
   return (
-    <div>
-      <button type="button">Go back</button>
-      <img
-        src={
-          movie.poster_path
-            ? `https://image.tmdb.org/t/p/w500/${movie.poster_path}`
-            : defaultImg
-        }
-        width={250}
-        alt="poster"
-      />
-      <h2>{movie.title}</h2>
-      <p>User score: </p>
-      <p>{movie.overview}</p>
-      <div>
-        <p>Genres</p>
-        <div>{genres}</div>
+    <>
+      <div className={css.film}>
+        <div className={css.photoContainer}>
+          <button className={css.backBtn} type="button">
+            Go back
+          </button>
+          <img
+            src={
+              movie.poster_path
+                ? `https://image.tmdb.org/t/p/w500/${movie.poster_path}`
+                : defaultImg
+            }
+            width={250}
+            alt="poster"
+          />
+        </div>
+        <div className={css.filmInfoContainer}>
+          <h2 className={css.movieTitle}>{movie.title}</h2>
+          <p className={css.score}>User score: </p>
+          <h3 className={css.overviewHeaders}>Overview: </h3>
+          <p className={css.filmOverview}>{movie.overview}</p>
+          <h3 className={css.overviewHeaders}>Genres: </h3>
+          <ul className={css.genresList}>{genres}</ul>
+        </div>
       </div>
-      <ul>
+      <p className={css.moreInfo}>Additional information</p>
+      <ul className={css.filmMoreInfoList}>
         <li>
           <NavLink to={`/movies/${movieId}/cast`} id={movieId}>
             Cast
@@ -63,6 +73,6 @@ export default function MovieDetailsPage() {
           </NavLink>
         </li>
       </ul>
-    </div>
+    </>
   );
 }
