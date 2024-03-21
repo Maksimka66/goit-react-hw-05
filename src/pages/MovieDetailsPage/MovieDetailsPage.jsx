@@ -2,11 +2,14 @@ import { useEffect, useState } from "react";
 import { NavLink, useParams } from "react-router-dom";
 import { filmDetails } from "../../films";
 
+import { Discuss } from "react-loader-spinner";
+
 import css from "./MovieDetailsPage.module.css";
 
 export default function MovieDetailsPage() {
   const [movie, setMovie] = useState({});
   const [genres, setGenres] = useState([]);
+  const [loader, setLoader] = useState(false);
   const { movieId } = useParams();
 
   const defaultImg =
@@ -19,6 +22,7 @@ export default function MovieDetailsPage() {
 
     const getMovieById = async () => {
       try {
+        setLoader(true);
         const film = await filmDetails(movieId);
         setMovie(film);
         console.log(film);
@@ -28,6 +32,8 @@ export default function MovieDetailsPage() {
         setGenres(filmGenres);
       } catch (error) {
         console.log(error);
+      } finally {
+        setLoader(false);
       }
     };
 
@@ -38,6 +44,15 @@ export default function MovieDetailsPage() {
     <>
       <div className={css.film}>
         <div className={css.photoContainer}>
+          {loader && (
+            <Discuss
+              height="80"
+              width="80"
+              radius="9"
+              color="green"
+              ariaLabel="three-dots-loading"
+            />
+          )}
           <button className={css.backBtn} type="button">
             Go back
           </button>
