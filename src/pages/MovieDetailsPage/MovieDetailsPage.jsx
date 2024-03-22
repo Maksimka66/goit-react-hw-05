@@ -1,5 +1,12 @@
-import { useEffect, useState } from "react";
-import { NavLink, useParams } from "react-router-dom";
+import { useEffect, useState, useRef } from "react";
+
+import {
+  NavLink,
+  Outlet,
+  useParams,
+  useLocation,
+  Link,
+} from "react-router-dom";
 
 import { filmDetails } from "../../films";
 import { Discuss } from "react-loader-spinner";
@@ -8,9 +15,11 @@ import css from "./MovieDetailsPage.module.css";
 
 export default function MovieDetailsPage() {
   const [movie, setMovie] = useState({});
-  const [genres, setGenres] = useState([]);
   const [loader, setLoader] = useState(false);
   const { movieId } = useParams();
+
+  const location = useLocation();
+  const backLink = useRef(location.state?.from ?? "/");
 
   const defaultImg =
     "<https://dl-media.viber.com/10/share/2/long/vibes/icon/image/0x0/95e0/5688fdffb84ff8bed4240bcf3ec5ac81ce591d9fa9558a3a968c630eaba195e0.jpg>";
@@ -25,11 +34,6 @@ export default function MovieDetailsPage() {
         setLoader(true);
         const film = await filmDetails(movieId);
         setMovie(film);
-        console.log(film);
-        const filmGenres = film.genres.map((genre) => (
-          <li key={genre.id}>{genre.name}</li>
-        ));
-        setGenres(filmGenres);
       } catch (error) {
         console.log(error);
       } finally {
@@ -56,9 +60,9 @@ export default function MovieDetailsPage() {
               backgroundColor="#F4442E"
             />
           )}
-          <button className={css.backBtn} type="button">
+          <Link className={css.backBtn} to={backLink.current}>
             Go back
-          </button>
+          </Link>
           <img
             src={
               movie.poster_path
@@ -71,17 +75,22 @@ export default function MovieDetailsPage() {
         </div>
         <div className={css.filmInfoContainer}>
           <h2 className={css.movieTitle}>{movie.title}</h2>
-          <p className={css.score}>User score: </p>
+          <p className={css.score}>
+            User score: {Math.round(movie.vote_average * 10)}%
+          </p>
           <h3 className={css.overviewHeaders}>Overview: </h3>
           <p className={css.filmOverview}>{movie.overview}</p>
           <h3 className={css.overviewHeaders}>Genres: </h3>
-          <ul className={css.genresList}>{genres}</ul>
+          <ul className={css.genresList}>
+            {movie.genres &&
+              movie.genres.map((genre) => <li key={genre.id}>{genre.name}</li>)}
+          </ul>
         </div>
       </div>
       <p className={css.moreInfo}>Additional information</p>
       <ul className={css.filmMoreInfoList}>
         <li>
-          <NavLink to={`/movies/${movieId}/cast`} id={movieId}>
+          <NavLink to="cast" id={movieId}>
             Cast
           </NavLink>
         </li>
@@ -91,6 +100,7 @@ export default function MovieDetailsPage() {
           </NavLink>
         </li>
       </ul>
+      <Outlet />
     </>
   );
 }

@@ -9,24 +9,25 @@ export default function MoviesPage() {
   const [query, setQuery] = useState("");
   const [loader, setLoader] = useState(false);
 
-  const handleSearch = async (inputValue) => {
-    if (inputValue.trim() === "") {
+  const handleSearch = (e) => {
+    e.preventDefault();
+    const value = e.target.elements.search.value;
+    if (value.trim() === "") {
       return;
     }
-    setQuery(inputValue);
+    setQuery(value);
   };
 
   useEffect(() => {
-    const response = async () => {
-      if (!query) {
-        return;
-      }
+    if (!query) {
+      return;
+    }
 
+    const response = async () => {
+      setLoader(true);
       try {
-        setLoader(true);
-        const request = await filmSearch();
+        const request = await filmSearch(query);
         setQuery(request);
-        console.log(request);
       } catch (error) {
         console.log(error);
       } finally {
@@ -45,16 +46,12 @@ export default function MoviesPage() {
           height="80"
           width="80"
           ariaLabel="discuss-loading"
-          wrapperStyle={{}}
           wrapperClass="discuss-wrapper"
           color="#fff"
           backgroundColor="#F4442E"
         />
       )}
-      <form
-        className={css.submitForm}
-        onSubmit={(e) => handleSearch(e.target.value.trim())}
-      >
+      <form className={css.submitForm} onSubmit={handleSearch}>
         <input
           className={css.movieSearch}
           type="text"

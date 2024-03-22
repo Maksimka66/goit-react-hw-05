@@ -6,9 +6,10 @@
 .movieSearch {
   width: 320px;
   border-radius: 12px;
+  padding: 8px 16px;
 }
 
 .submitBtn {
   background-color: green;
-  color: sandybrown;
+  color: yellow;
 }
