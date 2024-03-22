@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
-import MovieList from "../../components/MovieList/MovieList";
 
+import MovieList from "../../components/MovieList/MovieList";
 import { Discuss } from "react-loader-spinner";
 
 import { filmsRequest } from "../../films";
@@ -31,11 +31,14 @@ export default function HomePage() {
       <h1 className={css.homeHeader}>Trending today</h1>
       {loader && (
         <Discuss
+          visible={true}
           height="80"
           width="80"
-          radius="9"
-          color="green"
-          ariaLabel="three-dots-loading"
+          ariaLabel="discuss-loading"
+          wrapperStyle={{}}
+          wrapperClass="discuss-wrapper"
+          color="#fff"
+          backgroundColor="#F4442E"
         />
       )}
       <MovieList films={films} />

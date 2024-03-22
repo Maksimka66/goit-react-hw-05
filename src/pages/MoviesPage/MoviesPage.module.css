@@ -1,0 +1,14 @@
+.submitForm {
+  display: flex;
+  gap: 18px;
+}
+
+.movieSearch {
+  width: 320px;
+  border-radius: 12px;
+}
+
+.submitBtn {
+  background-color: green;
+  color: sandybrown;
+}

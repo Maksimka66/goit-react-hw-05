@@ -1,5 +1,4 @@
 import axios from "axios";
-import { Audio } from "react-loader-spinner";
 
 const config = {
   baseURL: "https://api.themoviedb.org/3",
@@ -25,8 +24,8 @@ export async function filmDetails(id) {
 }
 
 // Для інпуту
-export async function filmSearch(value) {
-  const response = await instance.get(`/search/movie?query=${value}&page=1`);
+export async function filmSearch() {
+  const response = await instance.get(`/search/movie`);
   return response.data;
 }
 

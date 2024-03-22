@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { NavLink, useParams } from "react-router-dom";
-import { filmDetails } from "../../films";
 
+import { filmDetails } from "../../films";
 import { Discuss } from "react-loader-spinner";
 
 import css from "./MovieDetailsPage.module.css";
@@ -46,11 +46,14 @@ export default function MovieDetailsPage() {
         <div className={css.photoContainer}>
           {loader && (
             <Discuss
+              visible={true}
               height="80"
               width="80"
-              radius="9"
-              color="green"
-              ariaLabel="three-dots-loading"
+              ariaLabel="discuss-loading"
+              wrapperStyle={{}}
+              wrapperClass="discuss-wrapper"
+              color="#fff"
+              backgroundColor="#F4442E"
             />
           )}
           <button className={css.backBtn} type="button">
