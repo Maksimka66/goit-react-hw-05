@@ -18,9 +18,7 @@ export async function filmDetails(id) {
 
 // Для інпуту
 export async function filmSearch(query) {
-  console.log(query);
   const response = await axios.get(`/search/movie?query=${query}`);
-  console.log(query);
   return response.data;
 }
 

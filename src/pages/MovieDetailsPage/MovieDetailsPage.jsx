@@ -7,9 +7,9 @@ import {
   useLocation,
   Link,
 } from "react-router-dom";
+import { Discuss } from "react-loader-spinner";
 
 import { filmDetails } from "../../films";
-import { Discuss } from "react-loader-spinner";
 
 import css from "./MovieDetailsPage.module.css";
 

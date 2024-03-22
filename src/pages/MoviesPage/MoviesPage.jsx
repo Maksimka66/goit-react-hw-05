@@ -4,9 +4,11 @@ import { Discuss } from "react-loader-spinner";
 import { filmSearch } from "../../films";
 
 import css from "./MoviesPage.module.css";
+import MovieList from "../../components/MovieList/MovieList";
 
 export default function MoviesPage() {
   const [query, setQuery] = useState("");
+  const [movies, setMovies] = useState([]);
   const [loader, setLoader] = useState(false);
 
   const handleSearch = (e) => {
@@ -16,6 +18,7 @@ export default function MoviesPage() {
       return;
     }
     setQuery(value);
+    e.currentTarget.reset();
   };
 
   useEffect(() => {
@@ -27,7 +30,7 @@ export default function MoviesPage() {
       setLoader(true);
       try {
         const request = await filmSearch(query);
-        setQuery(request);
+        setMovies(request.results);
       } catch (error) {
         console.log(error);
       } finally {
@@ -51,6 +54,7 @@ export default function MoviesPage() {
           backgroundColor="#F4442E"
         />
       )}
+
       <form className={css.submitForm} onSubmit={handleSearch}>
         <input
           className={css.movieSearch}
@@ -63,6 +67,7 @@ export default function MoviesPage() {
           Search
         </button>
       </form>
+      <MovieList films={movies} />
     </>
   );
 }

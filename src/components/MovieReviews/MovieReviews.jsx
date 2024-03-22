@@ -3,6 +3,8 @@ import { useEffect, useState } from "react";
 import { getMovieReviews } from "../../films";
 import { useParams } from "react-router-dom";
 
+import css from "./MovieReviews.module.css";
+
 export default function MovieReviews() {
   const [reviews, setReview] = useState([]);
   const { movieId } = useParams();
@@ -26,9 +28,9 @@ export default function MovieReviews() {
   return (
     <div>
       {reviews.length !== 0 ? (
-        <ul>
+        <ul className={css.reviewList}>
           {reviews.map((review) => (
-            <li key={review.id}>
+            <li key={review.id} className={css.reviewListItem}>
               <h3>Author: {review.author}</h3>
               <p>{review.content}</p>
             </li>
