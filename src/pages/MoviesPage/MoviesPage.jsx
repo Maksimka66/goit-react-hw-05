@@ -13,7 +13,6 @@ export default function MoviesPage() {
   const [loader, setLoader] = useState(false);
 
   const query = searchParams.get("query");
-  console.log(query, typeof query);
 
   const handleSearch = (e) => {
     e.preventDefault();
