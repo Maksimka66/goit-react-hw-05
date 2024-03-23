@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { Discuss } from "react-loader-spinner";
+import { useSearchParams } from "react-router-dom";
 
 import { filmSearch } from "../../films";
 
@@ -7,9 +8,12 @@ import css from "./MoviesPage.module.css";
 import MovieList from "../../components/MovieList/MovieList";
 
 export default function MoviesPage() {
-  const [query, setQuery] = useState("");
+  const [searchParams, setSearchParams] = useSearchParams();
   const [movies, setMovies] = useState([]);
   const [loader, setLoader] = useState(false);
+
+  const query = searchParams.get("query");
+  console.log(query, typeof query);
 
   const handleSearch = (e) => {
     e.preventDefault();
@@ -17,7 +21,7 @@ export default function MoviesPage() {
     if (value.trim() === "") {
       return;
     }
-    setQuery(value);
+    setSearchParams({ query: value });
     e.currentTarget.reset();
   };
 
@@ -26,7 +30,7 @@ export default function MoviesPage() {
       return;
     }
 
-    const response = async () => {
+    const fetchData = async () => {
       setLoader(true);
       try {
         const request = await filmSearch(query);
@@ -38,7 +42,7 @@ export default function MoviesPage() {
       }
     };
 
-    response();
+    fetchData();
   }, [query]);
 
   return (
