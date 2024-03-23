@@ -26,6 +26,7 @@ export default function MoviesPage() {
 
   useEffect(() => {
     if (!query) {
+      setMovies([]);
       return;
     }
 
@@ -70,7 +71,7 @@ export default function MoviesPage() {
           Search
         </button>
       </form>
-      <MovieList films={movies} />
+      {movies.length > 0 && <MovieList films={movies} />}
     </>
   );
 }
